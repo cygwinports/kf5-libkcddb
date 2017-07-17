@@ -1,0 +1,47 @@
+--- origsrc/libkcddb-17.04.2/libkcddb/CMakeLists.txt	2017-02-22 11:02:04.000000000 -0600
++++ src/libkcddb-17.04.2/libkcddb/CMakeLists.txt	2017-07-12 02:12:15.703996100 -0500
+@@ -58,7 +58,7 @@ target_link_libraries(KF5Cddb
+         Qt5::Network)
+ 
+ if(MUSICBRAINZ5_FOUND)
+-    target_link_libraries(KF5Cddb PRIVATE musicbrainz)
++    target_link_libraries(KF5Cddb PRIVATE ${MUSICBRAINZ5_LIBRARIES})
+ endif()
+ 
+ ki18n_wrap_ui(ui_sources cdinfodialog.ui cdinfoencodingwidget.ui)
+@@ -77,6 +77,7 @@ target_link_libraries(KF5CddbWidgets
+         KF5::I18n)
+ 
+ generate_export_header(KF5Cddb BASE_NAME KCddb)
++generate_export_header(KF5CddbWidgets BASE_NAME KCddbWidgets)
+ add_library(KF5::Cddb ALIAS KF5Cddb)
+ add_library(KF5::CddbWidgets ALIAS KF5CddbWidgets)
+ target_include_directories(KF5Cddb PUBLIC "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF5}/KCddb>")
+@@ -109,6 +110,7 @@ install(TARGETS KF5CddbWidgets EXPORT KF
+ 
+ install(FILES
+     ${CMAKE_CURRENT_BINARY_DIR}/kcddb_export.h
++    ${CMAKE_CURRENT_BINARY_DIR}/kcddbwidgets_export.h
+     ${CMAKE_CURRENT_BINARY_DIR}/configbase.h
+     ${KCddb_HEADERS}
+     DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5}/KCddb COMPONENT Devel
+--- origsrc/libkcddb-17.04.2/libkcddb/cdinfodialog.h	2017-02-22 11:02:04.000000000 -0600
++++ src/libkcddb-17.04.2/libkcddb/cdinfodialog.h	2017-07-12 02:10:04.860242600 -0500
+@@ -20,7 +20,7 @@
+ #ifndef KCDDB_CDINFODIALOG_H
+ #define KCDDB_CDINFODIALOG_H
+ 
+-#include <kcddb_export.h>
++#include <kcddbwidgets_export.h>
+ #include <cdinfo.h>
+ #include <kcddb.h>
+ 
+@@ -31,7 +31,7 @@ class QModelIndex;
+ 
+ namespace KCDDB
+ {
+-    class KCDDB_EXPORT CDInfoDialog : public QDialog
++    class KCDDBWIDGETS_EXPORT CDInfoDialog : public QDialog
+     {
+     Q_OBJECT
+     public:

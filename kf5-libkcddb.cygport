@@ -1,0 +1,30 @@
+inherit kf5
+
+NAME="kf5-libkcddb"
+VERSION=17.04.3
+RELEASE=1
+CATEGORY="Libs"
+SUMMARY="KDE 5 CDDB library"
+
+PATCH_URI="17.04-dllexport.patch"
+
+PKG_NAMES="libKF5Cddb5 libKF5Cddb-devel"
+libKF5Cddb5_CONTENTS="
+	usr/bin/cygKF5Cddb-5.dll
+	usr/bin/cygKF5CddbWidgets-5.dll
+	usr/lib/qt5/plugins/kcm_cddb.dll
+	usr/share/doc/HTML/*/kcontrol/cddbretrieval5/
+	usr/share/doc/${NAME}
+	usr/share/config.kcfg/libkcddb5.kcfg
+	usr/share/kservices5/libkcddb.desktop
+	usr/share/locale/*/LC_MESSAGES/*cddb.mo
+"
+libKF5Cddb_devel_REQUIRES="libKF5Config-devel libQt5Gui-devel"
+libKF5Cddb_devel_CONTENTS="
+	usr/include/KF5/KCddb/
+	usr/include/KF5/kcddb_version.h
+	usr/lib/cmake/KF5Cddb/
+	usr/lib/libKF5Cddb.dll.a
+	usr/lib/libKF5CddbWidgets.dll.a
+	usr/lib/qt5/mkspecs/modules/qt_KCddb.pri
+"
